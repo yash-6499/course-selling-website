@@ -53,7 +53,7 @@ export function Course({course}) {
         <div style={{display: "flex", justifyContent: "center", marginTop: 20}}>
             <Button variant="contained" size="large" onClick={() => {
                 navigate("/course/" + course._id);
-            }}>Edit</Button>
+            }}>Edit and delete</Button>
         </div>
     </Card>
 }

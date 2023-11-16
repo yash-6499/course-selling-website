@@ -28,14 +28,29 @@ function Course({ course }) {
 
 
 export default function UpdateCourse() {
+    const [isCourseDelete, setIsCouseDelete] = useState(false)
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("");
     const [course, setCourse] = useState({}); // Add state to store the updated course data
 
     const courseId = useParams();
-    console.log(course.title)
-    console.log(title)
+
+    // delete course 
+    const deleteCourse = async () => {
+        console.log('hellooo')
+        try {
+            const response = await axios.delete(`http://localhost:3000/admin/courses/${courseId.courseId}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                
+            })
+            setIsCouseDelete(true)
+        } catch (error) {
+            console.error("Error fetching course data:", error)
+        }
+    }
 
     // Fetch the course data when the component mounts
     useEffect(() => {
@@ -90,7 +105,9 @@ export default function UpdateCourse() {
                     display: 'flex',
                     justifyContent : 'center'
                 }}>
-                    <Course course={course} />
+                   {
+                    isCourseDelete ? "Course deleted succesfully" : <Course course={course} />
+                   } 
                     <Card
                         variant="outlined"
                         style={{
@@ -137,6 +154,13 @@ export default function UpdateCourse() {
                             onClick={updateCourse}
                         >
                             Update Course
+                        </Button>
+                        <Button
+                            style={{ width: "fit-content", marginLeft: "10px" }}
+                            variant="contained"
+                            onClick={deleteCourse}
+                        >
+                            Delete Course
                         </Button>
                     </Card>
                 </span>

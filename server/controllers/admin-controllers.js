@@ -89,6 +89,7 @@ const addNewCourse = async (req, res) => {
 }
 
 const updateCourse = async (req, res) => {
+    console.log('helo from update backend');
     try {
         const course = await Course.findByIdAndUpdate(req.params.courseId, req.body, { new: true });
         if (course) {
@@ -99,6 +100,18 @@ const updateCourse = async (req, res) => {
     } catch (error) {
         console.log(error)
 
+    }
+}
+
+// DELETE COURSE
+const deleteCourse = async (req, res) => {
+    console.log('helo from delete backend');
+    try {
+        const course = await Course.findByIdAndDelete(req.params.courseId)
+        res.json({message: course + 'course deleted succesfully'})
+    } catch (error) {
+        console.log(error)
+        
     }
 }
 
@@ -126,6 +139,7 @@ module.exports = {
     login,
     addNewCourse,
     updateCourse,
+    deleteCourse,
     displayAllCourses,
     displayParticularCourse
 }

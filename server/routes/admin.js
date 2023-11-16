@@ -1,5 +1,4 @@
 const express = require('express')
-const { User, Course, Admin } = require("../db/models")
 const { authenticateJwt } = require("../middleware/auth")
 
 // CONTROLLERS
@@ -19,6 +18,9 @@ router.post('/courses', authenticateJwt, controllers.addNewCourse)
 
 // ADMIN UPDATES COURSES
 router.put('/courses/:courseId', authenticateJwt, controllers.updateCourse)
+
+// DELETE COURSE
+router.delete('/courses/:courseId', authenticateJwt, controllers.deleteCourse)
 
 // DISPLAY ALL THE COURSES
 router.get('/courses', authenticateJwt, controllers.displayAllCourses)
