@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import { Typography } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -12,7 +13,7 @@ function Signin() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  // console.log(email, password)
+  const navigate = useNavigate()
 
   return (
    
@@ -57,7 +58,7 @@ function Signin() {
             })
             const data = res.data;
             localStorage.setItem("token", data.token)
-            window.location = "/courses"
+            navigate('/courses')
           }}
 
         >Sign in</Button>
